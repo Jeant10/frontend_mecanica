@@ -2,47 +2,46 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { AvatarForm } from '../../components/organisms/AvatarForm';
+import { ReservaForm } from '../../components/organisms/ReservaForm';
 
-export const UpdateProfileAvatar = () => {
+export const UpdateReserva = () => {
     const { id } = useParams();
-    const [avatar, setAvatar] = useState({});
+    const [reserva, setReserva] = useState({});
     const token = localStorage.getItem('token');
 
-    console.log("token", token);
-
     useEffect(() => {
-        const getAvatar = async () => {
+        const getReserva = async () => {
             try {
                 const response = await axios.get(
-                    'https://appsistemacarcelario.herokuapp.com/api/v1/profile',
+                    `http://localhost:8000/api/v1/reserva/${id}`,
                     { headers: { 'accept': 'application/json', 'authorization': token } }
                 )
                 const user = { ...response.data.data.user, id }
-                setAvatar(user);
+                setReserva(user);
                 console.log(user);
             } catch (error) {
                 console.log(error);
             }
         }
-        getAvatar()
+        getReserva()
     }, [])
 
     return (
         <div>
-            <h1 className='font-black text-4xl text-sky-900'>My Profile</h1>
+            <h1 className='font-black text-4xl text-sky-900'>Reserva</h1>
             <hr className='mt-3' />
             {
-                Object.keys(avatar).length > 0 ?
+                Object.keys(reserva).length > 0 ?
                     (
-                        <AvatarForm avatar={avatar} />
+                        <ReservaForm reserva={reserva} />
                     )
                     :
                     (
-                        <p className="bg-yellow-600 border-t border-b border-yellow-900 text-white px-4 py-3 m-5 text-center rounded-lg">No data for this Profile</p>
+                        <p className="bg-yellow-600 border-t border-b border-yellow-900 text-white px-4 py-3 m-5 text-center rounded-lg">No data for this reserva</p>
                     )
             }
         </div>
     )
 }
+
 

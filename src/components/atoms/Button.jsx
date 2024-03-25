@@ -5,7 +5,7 @@ export const Button = ({ name, type, styles }) => {
     return (
         <>
             <button
-                className={`inline-flex justify-center py-1.5 px-3 rounded-full text-base text-white tracking-wider bg-gradient-to-r from-cyan-500 to-violet-500 hover:from-cyan-600 hover:to-violet-600 ${styles}`}
+                className={`inline-flex justify-center py-1.5 px-3 rounded-full text-base text-white tracking-wider bg-gradient-to-r from-amber-500 to-amber-700 hover:from-amber-700 hover:to-amber-500 ${styles}`}
                 type={type}
             >
                 {name}

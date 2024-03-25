@@ -3,20 +3,14 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-export const ReportForm = ({ report }) => {
+export const VehiculoForm = ({ vehiculo }) => {
 
     const navigate = useNavigate();
     const [error, setError] = useState(false);
-    const [created, setCreated] = useState([])
-
     const [form, setForm] = useState({
-        title: report?.title ?? "",
-        description: report?.description ?? "",
-        created_at: report?.created_at ?? "",
-        // email: report?.email ?? "",
-        // personal_phone: report?.personal_phone ?? "",
-        // home_phone: report?.home_phone ?? "",
-        // address: report?.address ?? ""
+        marca: vehiculo?.marca ?? "",
+        modelo: vehiculo?.modelo ?? "",
+        descripcion: vehiculo.descripcion ?? "",
     });
     const token = localStorage.getItem('token');
 
@@ -40,19 +34,19 @@ export const ReportForm = ({ report }) => {
         }
 
         try {
-            console.log(report)
-            if (report?.id) {
+            console.log(vehiculo)
+            if (vehiculo?.id) {
                 await axios.post(
-                    `https://appsistemacarcelario.herokuapp.com/api/v1/report/${report.id}/update`,
+                    `http://localhost:8000/api/v1/vehiculo/${vehiculo.id}/update`,
                     { ...form }, { headers: { 'accept': 'application/json', 'authorization': token } }
                 );
             } else {
                 await axios.post(
-                    `https://appsistemacarcelario.herokuapp.com/api/v1/report/create`,
+                    `http://localhost:8000/api/v1/vehiculo/create`,
                     { ...form }, { headers: { 'accept': 'application/json', 'authorization': token } }
                 );
             }
-            navigate('/reports');
+            navigate('/vehiculos');
 
         } catch (error) {
             console.log(error);
@@ -61,8 +55,8 @@ export const ReportForm = ({ report }) => {
 
     return (
         <div className='bg-white mt-10 px-5 py-10 rounded-lg shadow-lg md:w-3/4 mx-auto'>
-            <h1 className='text-gray-800 font-bold uppercase text-center text-xl mb-4'>
-                {report?.id ? 'Edit' : 'Create'} Report
+            <h1 className='text-sky-900 font-bold uppercase text-center text-xl mb-4'>
+                {vehiculo?.id ? 'Edit' : 'Create'} Vehiculo
             </h1>
 
             {
@@ -72,15 +66,31 @@ export const ReportForm = ({ report }) => {
             <form onSubmit={handleSubmit}>
                 <div>
                     <label
-                        htmlFor='title'
-                        className='text-gray-700 uppercase font-bold'>Title</label>
+                        htmlFor='marca'
+                        className='text-gray-700 uppercase font-bold'>Marca</label>
                     <input
-                        id='title'
+                        id='marca'
                         type="text"
                         className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md mb-5'
-                        placeholder='title '
-                        name='title'
-                        value={form.title}
+                        placeholder='Marca'
+                        name='marca'
+                        value={form.marca}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+
+                <div>
+                    <label
+                        htmlFor='modelo'
+                        className='text-gray-700 uppercase font-bold'>Modelo</label>
+                    <input
+                        id='modelo'
+                        type="text"
+                        className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md mb-5'
+                        placeholder='Modelo'
+                        name='modelo'
+                        value={form.modelo}
                         onChange={handleChange}
                         required
                     />
@@ -102,35 +112,6 @@ export const ReportForm = ({ report }) => {
                     />
                 </div>
 
-                <div>
-                    <label
-                        htmlFor='author'
-                        className='text-gray-700 uppercase font-bold'>Author</label>
-                    <input
-                        id='author'
-                        type="author"
-                        className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md mb-5'
-                        placeholder='Author'
-                        name='author'
-                        value={created.username}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label
-                        htmlFor='status'
-                        className='text-gray-700 uppercase font-bold'>State</label>
-                        <select 
-                        id='email'
-                        className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md mb-5'
-                        value={form.status}
-                        onChange={handleChange}
-                        required>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
-                        </select>
-                    </div>
 
                 {/* <div>
                     <label
@@ -194,7 +175,7 @@ export const ReportForm = ({ report }) => {
 
                 <input
                     type="submit" className='bg-sky-800 w-full p-3 text-white uppercase font-bold rounded-lg hover:bg-sky-900 cursor-pointer transition-all'
-                    value={report?.id ? 'Update' : 'Save'}
+                    value={vehiculo?.id ? 'Update' : 'Save'}
                 />
 
             </form>

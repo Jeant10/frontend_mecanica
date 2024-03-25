@@ -2,42 +2,42 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { DirectorForm } from '../../components/organisms/DirectorForm';
+import { VehiculoForm } from '../../components/organisms/VehiculoForm';
 
-export const UpdateDirector = () => {
+export const UpdateVehiculo = () => {
     const { id } = useParams();
-    const [director, setDirector] = useState({});
+    const [vehiculo, setVehiculo] = useState({});
     const token = localStorage.getItem('token');
 
     useEffect(() => {
-        const getDirector = async () => {
+        const getVehiculo = async () => {
             try {
                 const response = await axios.get(
-                    `https://appsistemacarcelario.herokuapp.com/api/v1/director/${id}`,
+                    `http://localhost:8000/api/v1/vehiculo/${id}`,
                     { headers: { 'accept': 'application/json', 'authorization': token } }
                 )
                 const user = { ...response.data.data.user, id }
-                setDirector(user);
+                setVehiculo(user);
                 console.log(user);
             } catch (error) {
                 console.log(error);
             }
         }
-        getDirector()
+        getVehiculo()
     }, [])
 
     return (
         <div>
-            <h1 className='font-black text-4xl text-sky-900'>Director</h1>
+            <h1 className='font-black text-4xl text-sky-900'>Vehiculo</h1>
             <hr className='mt-3' />
             {
-                Object.keys(director).length > 0 ?
+                Object.keys(vehiculo).length > 0 ?
                     (
-                        <DirectorForm director={director} />
+                        <VehiculoForm vehiculo={vehiculo} />
                     )
                     :
                     (
-                        <p className="bg-yellow-600 border-t border-b border-yellow-900 text-white px-4 py-3 m-5 text-center rounded-lg">No data for this director</p>
+                        <p className="bg-yellow-600 border-t border-b border-yellow-900 text-white px-4 py-3 m-5 text-center rounded-lg">No data for this vehiculo</p>
                     )
             }
         </div>

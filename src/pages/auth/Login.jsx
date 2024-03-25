@@ -17,7 +17,7 @@ export const Login = () =>
         e.preventDefault();
         try {
             const response = await axios.post(
-                'https://appsistemacarcelario.herokuapp.com/api/v1/login',
+                'http://localhost:8000/api/v1/login',
                 { email, password },
                 { headers: { 'accept': 'application/json' } }
             )
@@ -33,18 +33,18 @@ export const Login = () =>
 
     return (
         <>
-            <h2 className='text-2xl md:text-3xl font-bold'>Welcome Back</h2>
-            <p className='text-sm text-gray-500 pb-6'>Please sign in to your account</p>
+            <h2 className='text-2xl md:text-3xl font-bold'>Bienvenido</h2>
+            <p className='text-sm text-gray-500 pb-6'>Ingresa con tu cuenta</p>
             <form className='space-y-7 text-left' onSubmit={onLogin}>
                 <div>
-                    <Label description="Email address" htmlFor='email' />
+                    <Label description="Email" htmlFor='email' />
                     <input
-                        className='rounded-2xl text-base px-4 py-2 border-0 border-b border-gray-300 focus:border-cyan-500 disabled:opacity-50 block mt-2 w-full'
+                        className='rounded-2xl text-base px-4 py-2 border-0 border-b border-gray-300 focus:border-amber-500 disabled:opacity-50 block mt-2 w-full'
                         id='email'
                         name='email'
                         type='email'
                         value={email}
-                        placeholder='Enter your email'
+                        placeholder='Ingresa tu email'
                         maxLength="35"
                         required
                         autoFocus
@@ -52,29 +52,29 @@ export const Login = () =>
                     />
                 </div>
                 <div>
-                    <Label description="Password" htmlFor='password' />
+                    <Label description="Contraseña" htmlFor='password' />
                     <input
-                        className='rounded-2xl text-base px-4 py-2 border-0 border-b border-gray-300 focus:border-cyan-500 disabled:opacity-50 block mt-2 w-full'
+                        className='rounded-2xl text-base px-4 py-2 border-0 border-b border-gray-300 focus:border-amber-500 disabled:opacity-50 block mt-2 w-full'
                         id='password'
                         name='password'
                         type='password'
                         value={password}
-                        placeholder='Enter your password'
+                        placeholder='Ingresa tu contraseña'
                         required
                         onChange={e => setPassword(e.target.value)}
                     />
                 </div>
 
-                <div>
+                {/* <div>
 
                     <Link type = "button" to ={"/forgot-password"} className="text-sm text-blue-600 hover:text-pink-700 px-2">
-                            Forgot your password?
+                            Perdiste tu contrasela?
                     </Link>
 
-                </div>
+                </div> */}
 
                 <div className='pt-4 flex justify-center'>
-                    <Button name='Sing in' styles='w-3/5' />
+                    <Button name='Log in' styles='w-3/5' />
                 </div>
             </form>
         </>

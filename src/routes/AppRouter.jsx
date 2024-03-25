@@ -7,16 +7,23 @@ import { AuthProvider } from "../contexts";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 import { DashboardTemplate } from '../components/templates/DashboardTemplate';
-import { ListDirectors } from '../pages/director/ListDirectors';
-import { ShowDirector } from '../pages/director/ShowDirector';
-import { CreateDirector, UpdateDirector } from '../pages/director';
-import { ShowProfile } from '../pages/Profile/ShowProfile';
-import { ShowJails } from '../pages/Jails/ShowJails';
-import { ListReports } from '../pages/Report/ListReports';
-import { ShowReport } from '../pages/Report/ShowReport';
-import { CreateReport, UpdateReport} from '../pages/Report';
+
+
 import ForgotPassword from '../pages/auth/ForgotPassword';
 import ResetPassword from '../pages/auth/ResetPassword';
+
+
+import { ListVehiculos } from '../pages/vehiculos/ListVehiculos';
+import { ShowVehiculo } from '../pages/vehiculos/ShowVehiculo';
+import { CreateVehiculo, UpdateVehiculo } from '../pages/vehiculos';
+
+import { ListClientes } from '../pages/clientes/ListClientes';
+import { ShowCliente } from '../pages/clientes/ShowCliente';
+import { CreateCliente, UpdateCliente } from '../pages/clientes';
+
+import { ListReservas } from '../pages/reservas/ListReservas';
+import { ShowReserva} from '../pages/reservas/ShowReserva';
+import { CreateReserva, UpdateReserva } from '../pages/reservas';
 
 export const AppRouter = () => {
     return (
@@ -41,17 +48,25 @@ export const AppRouter = () => {
                     <PrivateRoute>
                         <Routes>
                                 <Route element={<DashboardTemplate/>}>
+
                                     <Route index path='/' element={<App />} />
-                                    <Route index path='/directors' element={<ListDirectors />} />
-                                    <Route index path='/directors/show/:id' element={<ShowDirector />} />
-                                    <Route index path='/directors/create' element={<CreateDirector />} />
-                                    <Route index path='/directors/edit/:id' element={<UpdateDirector />} />
-                                    <Route index path='/profile' element={<ShowProfile />} />
-                                    <Route index path = '/jails' element = {<ShowJails/>} />
-                                    <Route index path = '/reports' element = {<ListReports/>} />
-                                    <Route index path = '/reports/show/:id' element={<ShowReport/>} />
-                                    <Route index path='/reports/create' element={<CreateReport />} />
-                                    <Route index path='/reports/edit/:id' element={<UpdateReport />} />
+
+                                    <Route index path='/vehiculos' element={<ListVehiculos/>} />
+                                    <Route index path='/vehiculos/show/:id' element={<ShowVehiculo />} />
+                                    <Route index path='/vehiculos/create' element={<CreateVehiculo />} />
+                                    <Route index path='/vehiculos/edit/:id' element={<UpdateVehiculo />} />
+
+
+                                    <Route index path='/clientes' element={<ListClientes/>} />
+                                    <Route index path='/clientes/show/:id' element={<ShowCliente />} />
+                                    <Route index path='/clientes/create' element={<CreateCliente />} />
+                                    <Route index path='/clientes/edit/:id' element={<UpdateCliente />} />
+                                    
+                                    <Route index path='/reservas' element={<ListReservas/>} />
+                                    <Route index path='/reservas/show/:id' element={<ShowReserva />} />
+                                    <Route index path='/reservas/create' element={<CreateReserva />} />
+                                    <Route index path='/reservas/edit/:id' element={<UpdateReserva />} />
+
                                 </Route>
                         </Routes>
 

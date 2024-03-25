@@ -1,5 +1,4 @@
 export { Cover } from './Cover';
-export * from './DirectorForm';
-export * from './ReportForm';
-
-
+export * from './ClienteForm';
+export * from './VehiculoForm';
+export * from './ReservaForm';

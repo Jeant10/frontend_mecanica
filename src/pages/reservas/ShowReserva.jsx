@@ -3,59 +3,59 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export const ShowReport = () => {
+export const ShowReserva = () => {
     const { id } = useParams();
-    const [report, setReport] = useState({});
+    const [reserva, setReserva] = useState({});
     const token = localStorage.getItem('token');
 
     useEffect(() => {
-        const getReport = async () => {
+        const getReserva = async () => {
             try {
                 const response = await axios.get(
-                    `https://appsistemacarcelario.herokuapp.com/api/v1/report/${id}`,
+                    `http://localhost:8000/api/v1/reserva/${id}`,
                     { headers: { 'accept': 'application/json', 'authorization': token } }
                 )
                 const user = { ...response.data.data.user, id }
-                setReport(user);
+                setReserva(user);
             } catch (error) {
                 console.log(error);
             }
         }
-        getReport()
+        getReserva()
     }, [])
 
     return (
         <div>
-            <h1 className='font-black text-4xl text-sky-900'>Report</h1>
+            <h1 className='font-black text-4xl text-sky-900'>Reserva</h1>
             <hr className='mt-3' />
-            <p className='mt-3'>Report details</p>
+            <p className='mt-3'>Reserva details</p>
             {
-                Object.keys(report).length > 0 ?
+                Object.keys(reserva).length > 0 ?
                     (
                         <div className='m-5 flex justify-between'>
                             <div>
                                 <p className="text-2xl text-gray-00 mt-4">
-                                    <span className="text-gray-600 uppercase font-bold">* Title: </span>
-                                    {report.title}
+                                    <span className="text-gray-600 uppercase font-bold">Codigo:  </span>
+                                    {reserva.codigo}
                                 </p>
                                 <p className="text-2xl text-gray-00 mt-4">
-                                    <span className="text-gray-600 uppercase font-bold">* Author: </span>
-                                    {report.username}
+                                    <span className="text-gray-600 uppercase font-bold">Descripcion: </span>
+                                    {reserva.descripcion}
                                 </p>
                                 <p className="text-2xl text-gray-00 mt-4">
-                                    <span className="text-gray-600 uppercase font-bold">* Description: </span>
-                                    {report.description}
+                                    <span className="text-gray-600 uppercase font-bold">id_cliente: </span>
+                                    {reserva.id_cliente}
                                 </p>
                                 <p className="text-2xl text-gray-00 mt-4">
-                                    <span className="text-gray-600 uppercase font-bold">* Created At: </span>
-                                    {report.created_at}
+                                    <span className="text-gray-600 uppercase font-bold">id_vehiculo: </span>
+                                    {reserva.id_reserva}
                                 </p>
                             </div>
                         </div>
                     )
                     :
                     (
-                        <p className="bg-yellow-600 border-t border-b border-yellow-900 text-white px-4 py-3 m-5 text-center rounded-lg">No data for this report</p>
+                        <p className="bg-yellow-600 border-t border-b border-yellow-900 text-white px-4 py-3 m-5 text-center rounded-lg">No data for this reserva</p>
                     )
             }
         </div>
