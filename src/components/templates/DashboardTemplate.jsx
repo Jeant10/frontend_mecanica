@@ -67,7 +67,7 @@ export const DashboardTemplate = () => {
                   : "text-white"
               } text-2xl block mt-2 hover:text-blue-200`}
             >
-              Clientes
+              Vehiculos
             </Link>
           </li>
 
